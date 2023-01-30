@@ -61,7 +61,8 @@ class PDF_Automator:
                     if pg <= (len(reading.pages)):
                         writing.add_page(reading.pages[pg - 1])
                     # else:
-                    #     Add warning when page out of bound.
+                    #     FIXME: Add warning when page out of bound.
+                    # FIXME: Send update to the GUI.
                 writing.write(self.__output_folder + "/" + file)
 
 class Resplit_GUI:
@@ -70,14 +71,24 @@ class Resplit_GUI:
     def __init__(self):
         # Creating the window.
         self.__window = tkinter.Tk()
+        self.__window.title("Resplit")
+        self.__window.geometry("800x600")
+        self.__build_ui()
         
         # Create the model.
-        self.__model = PDF_Automator(self)
+        self.__model = PDF_Automator("", "", self)
 
         # Display the window.
         self.__window.mainloop()
 
+    def __build_ui(self):
+        # FIXME: GUI incomplete.
+        container = tkinter.Frame(self.__window)
+        container.grid(padx = 20, pady = 20)
+        
+        text = tkinter.Label(container, text="LACCEI Resplit Tool")
+        text.place(x = 70, y = 90)
+
 # Top-level code.
 if __name__ == '__main__':
-    # gui = Resplit_GUI()
-    pass
+    gui = Resplit_GUI()
