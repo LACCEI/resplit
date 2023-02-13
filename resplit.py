@@ -5,15 +5,17 @@ import tkinter
 import pypdf
 import re
 import os
+import csv
 
 class PDF_Automator:
     """PDF Automator class"""
 
-    def __init__(self, input_folder: str = "", output_folder: str = "", \
-    Resplit_GUI = None):
+    def __init__(self, input_dir: str = "", output_dir: str = "", \
+    csv_file: str = "", Resplit_GUI = None):
         self.__GUI_interface = Resplit_GUI
-        self.__input_folder = input_folder
-        self.__output_folder = output_folder
+        self.__input_dir = input_dir
+        self.__output_dir = output_dir
+        self.__csv_file = csv_file
 
     def perform(self, task: str, config: dict):
         """
@@ -38,6 +40,7 @@ class PDF_Automator:
         
         pages = pgs.split(",")
         nums = []
+        processed_pdfs = []
         
         for i in range(len(pages)):
             pages[i] = pages[i].strip()
@@ -52,10 +55,10 @@ class PDF_Automator:
                 nums.append(int(pages[i]))
         
         # Automation task.
-        input_files = os.listdir(self.__input_folder)
+        input_files = os.listdir(self.__input_dir)
         for file in input_files:
             if file.endswith(".pdf"):
-                reading = pypdf.PdfReader(self.__input_folder + "/" + file)
+                reading = pypdf.PdfReader(self.__input_dir + "/" + file)
                 writing = pypdf.PdfWriter()
                 for pg in nums:
                     if pg <= (len(reading.pages)):
@@ -63,7 +66,35 @@ class PDF_Automator:
                     # else:
                     #     FIXME: Add warning when page out of bound.
                     # FIXME: Send update to the GUI.
-                writing.write(self.__output_folder + "/" + file)
+                writing.write(self.__output_dir + "/" + file)
+                if self.__csv_file != '':
+                    processed_pdfs.append(file) 
+        
+        if self.__csv_file != '':
+            self.__write_csv(processed_pdfs)
+
+    def set_csv_file(self, csv_file: str):
+        """Set the path to the CSV file where to write the log."""
+        self.__csv_file = csv_file
+
+    def dis_csv(self):
+        """Disable logging with CSV."""
+        self.__csv_file = ''
+
+    def __write_csv(self, files: list):
+        """Writting the log of processed files to the CSV file."""
+        if self.__csv_file != '':
+            if os.path.exists(self.__csv_file):
+                os.remove(self.__csv_file)
+            
+            log_file = open(self.__csv_file, "w")
+            output = csv.writer(log_file)
+            output.writerow(["File"])
+            
+            for file in files:
+                row = []
+                row.append(file)
+                output.writerow(row)
 
 class Resplit_GUI:
     """Graphical user interface of Resplit."""
