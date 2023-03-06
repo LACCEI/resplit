@@ -5,7 +5,10 @@ The figure below shows the two central states of the GUI. The left side presents
 
 <figure>
     <img src="imgs/mockup.png">
-    <figcaption style="text-align: center;">Initial state of the program on the left. Progress and completion on the right.</figcaption>
+    <figcaption>Initial state of the program on the left. Progress and completion on the right.</figcaption>
 </figure>
+
+<br />
+<br />
 
 The GUI doesn't have to be exactly 800x600. Decreasing the size could also reduce the white space, but it is up to the developer. Using the same colors as the mockup is encouraged but not required.
