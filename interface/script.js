@@ -3,8 +3,10 @@ const outputFolder = document.getElementById("getOutputFolder");
 const closeButton = document.getElementById('closeBtn');
 const restartButton = document.getElementById('restartBtn');
 const numberInput = document.getElementById("number-input");
-const getsFile = document.getElementById("getFile")
+const getsFile = document.getElementById("getFile");
 const progress = document.getElementById("progress")
+const processedPDFs = document.getElementById ("processedPDFs");
+const totalPDFs = document.getElementById("totalPDFs")
 
 const pattern = /^(\d+|\d+-\d+)(,\s*\d+|\s*,\s*\d+-\d+)*$/;
 document.getElementById("processBtn").addEventListener("click", taskTrigger);
@@ -34,14 +36,15 @@ inputFolder.addEventListener('click', async (e) => {
 
 // gets the path for the output folder
 outputFolder.addEventListener('click', async (e) => {
+  debugger
   e.preventDefault();
   let path = await eel.selectFolder()();
+  taskConf.outputFolder=path 
   path = path.split('/').pop(); // puts the path into an array using / as delimiter and pops the last element
   outputFolder.nextElementSibling.innerHTML = path;
-  taskConf.outputFolder=path 
 } ) 
 
-// CLOSING THE PROGRESSED WINDOW
+// closing the progressed window 
 closeButton.addEventListener('click', async (e) =>{
   document.getElementById("gray").style.display='none'; 
 });
@@ -73,8 +76,10 @@ function processBtnStatus() {
 }
 
 eel.expose(updateProcessBar)
-function updateProcessBar(number) {
+function updateProcessBar(number, PDFstotal, PDFsprocessed) {
   number=(number>100) ? 100 : number;
   number=(number<0) ? 0 : number;
   progress.value = number; // changes the value/progression
-}
+  processedPDFs.innerHTML = PDFsprocessed;
+  totalPDFs.innerHTML = PDFstotal;
+} 
