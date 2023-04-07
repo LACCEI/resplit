@@ -56,6 +56,9 @@ class PDF_Automator:
         
         # Automation task.
         input_files = os.listdir(self.__input_dir)
+        total_number_files = len (input_files)
+        processed_files = 0
+
         for file in input_files:
             if file.endswith(".pdf"):
                 reading = pypdf.PdfReader(self.__input_dir + "/" + file)
@@ -65,8 +68,11 @@ class PDF_Automator:
                         writing.add_page(reading.pages[pg - 1])
                     # else:
                     #     FIXME: Add warning when page out of bound.
-                    # FIXME: Send update to the GUI.
                 writing.write(self.__output_dir + "/" + file)
+                # FIXME: Send update to the GUI.
+                processed_files += 1 
+                self.__GUI_interface((processed_files/total_number_files)*100)
+
                 if self.__csv_file != '':
                     processed_pdfs.append(file) 
         

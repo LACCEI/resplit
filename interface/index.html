@@ -9,43 +9,54 @@
 </head>
 
 <body>
+
 <!-- Meant for the header on top--> 
-    <div class="headerMargin">
-        <h2 class="header1"> LACCEI</h2>
-        <h2 class="header2"> Resplit </h2>
-    </div>
-    <div class= "line"> </div>
+<div class="headerMargin">
+    <h2 class="header1"> LACCEI</h2>
+    <h2 class="header2"> Resplit </h2>
+</div>
+<div class= "line"> </div>
 
 <!-- Input box--> 
-    <div class = "inputBox">
-        <label for="files" class="btnn">Input Folder</label>
-        <div>
-        <button id ="getInputFolder"> Choose Folder </button>
-        <p> Choose File </p>
-        </div>
-    </div>
+<div class = "inputBox">
+    <label for="files" class="btnn"> Input Folder</label>
+  <div>
+    <button id ="getInputFolder"> Choose Folder </button>
+    <p id="folderName">No folder selected</p>
+  </div>
+</div>
 
 <!-- Output box--> 
 <div class = "outputBox">
     <label for="files" class="btnn"> Output Folder</label>
-    <input type = "file" id = "getOutputFolder" />
+  <div>
+    <button id ="getOutputFolder"> Choose Folder </button>
+    <p> No folder selected </p>
+  </div>
+</div>
+
+<!--Page selection box-->
+<div class ="pageNumbers"> 
+    <label for="number-input"> Enter the page numbers to be selected:</label>
+    <input type="text" name="number-input" id="number-input">
 </div>
 
 <!-- log box--> 
 <div class = "logBox">
-    <input type = "checkbox" id = "getFile" />
+    <input type = "checkbox" id = "getFile" checked/>
     <label for="files" class="btn"> Generate a CSV log file. </label>
 
-    <div class = "Process" > 
+    <div class = "Process"> 
     <button class="button" id="processBtn">Process</button>
     </div>
 </div>
 
+<!--progress bar + overlay -->
  <div class="gray" id="gray"> 
     <div class="overlay"> 
         <h1> Processing</h1>
         <label for="file"></label>
-        <progress id="file" value="50" max="100"> 50% </progress>
+        <progress id="progress" value="50" max="100"> 50% </progress>
         <h5> Progress: 50/100</h5> <!-- NOTE THIS!!--> 
         <button class="restartBtn" id="restartBtn">Restart</button>
         <button class="closeBtn" id="closeBtn">Close</button>
