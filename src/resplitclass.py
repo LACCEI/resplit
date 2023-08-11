@@ -71,7 +71,7 @@ class PDF_Automator:
                 writing.write(self.__output_dir + "/" + file)
                 # FIXME: Send update to the GUI.
                 processed_files += 1 
-                self.__GUI_interface((processed_files/total_number_files)*100)
+                self.__GUI_interface((processed_files/total_number_files) * 100, total_number_files, processed_files)
 
                 if self.__csv_file != '':
                     processed_pdfs.append(file) 
@@ -90,10 +90,11 @@ class PDF_Automator:
     def __write_csv(self, files: list):
         """Writting the log of processed files to the CSV file."""
         if self.__csv_file != '':
-            if os.path.exists(self.__csv_file):
-                os.remove(self.__csv_file)
+            log_file_path = self.__output_dir + self.__csv_file
+            if os.path.exists(log_file_path):
+                os.remove(log_file_path)
             
-            log_file = open(self.__csv_file, "w")
+            log_file = open(log_file_path, "w")
             output = csv.writer(log_file)
             output.writerow(["File"])
             

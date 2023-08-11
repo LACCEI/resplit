@@ -1,9 +1,9 @@
 import eel 
-from resplit import *
+from resplitclass import *
 import tkinter 
 import tkinter.filedialog as filedialog
 
-eel.init('interface')
+eel.init('.')
 
 @eel.expose
 def processing(input_dir: str, output_dir:str, check: bool, task:str, specification, name: str):
@@ -18,5 +18,4 @@ def selectFolder():
     directory_path = filedialog.askdirectory()
     return directory_path
 
-eel.start('index.html', size=(1200,800))
-
+eel.start('index.html', size=(350, 400))

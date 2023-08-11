@@ -46,7 +46,8 @@ outputFolder.addEventListener('click', async (e) => {
 
 // closing the progressed window 
 closeButton.addEventListener('click', async (e) =>{
-  document.getElementById("gray").style.display='none'; 
+  // document.getElementById("gray").style.display='none';
+  window.close();
 });
 
 restartButton.addEventListener('click', async (e) =>{
@@ -82,4 +83,12 @@ function updateProcessBar(number, PDFstotal, PDFsprocessed) {
   progress.value = number; // changes the value/progression
   processedPDFs.innerHTML = PDFsprocessed;
   totalPDFs.innerHTML = PDFstotal;
-} 
+}
+
+let defaultPageSelection = true;
+document.getElementById('number-input').addEventListener("keydown", (e) => {
+  if (defaultPageSelection) {
+    document.getElementById('number-input').value = '';
+    defaultPageSelection = false;
+  }
+});
