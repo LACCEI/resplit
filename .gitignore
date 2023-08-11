@@ -1,6 +1,8 @@
 .DS_Store
 
-# Venv
+# Python Virtual Environment
+venv/
+
 bin/
 lib/
 pyvenv.cfg
