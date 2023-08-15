@@ -71,7 +71,8 @@ class PDF_Automator:
                 writing.write(self.__output_dir + "/" + file)
                 # FIXME: Send update to the GUI.
                 processed_files += 1 
-                self.__GUI_interface((processed_files/total_number_files) * 100, total_number_files, processed_files)
+                if (self.__GUI_interface != None):
+                    self.__GUI_interface((processed_files/total_number_files) * 100, total_number_files, processed_files)
 
                 if self.__csv_file != '':
                     processed_pdfs.append(file) 
