@@ -3,12 +3,5 @@
 # Python Virtual Environment
 venv/
 
-bin/
-lib/
-pyvenv.cfg
-Scripts/ 
-
-Include/
-
-# Python
-__pycache__/
+# Local testing enviornment
+sandbox/
