@@ -84,7 +84,8 @@ class PDF_Automator:
     def __write_csv(self, files: list):
         """Writting the log of processed files to the CSV file."""
         if self.__csv_file != '':
-            log_file_path = self.__output_dir + self.__csv_file
+            # log_file_path = self.__output_dir + self.__csv_file
+            log_file_path = self.__csv_file
             if os.path.exists(log_file_path):
                 os.remove(log_file_path)
             
